@@ -69,10 +69,11 @@ public class NegAlumnos {
                 + "apellido2 = '" + alumno.getApellido2() + "' "
                 + "WHERE registro = " + alumno.getRegistro() + ";"
         );
-        alumno.setRegistro(id);
-        if (id > 0) {
+        //alumno.setRegistro(id);
+        //if (id > 0) {
             Actualizar();
-        }
+        
+        //}
         return id;
     }
     

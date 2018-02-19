@@ -113,13 +113,14 @@ public class ClaseDatos {
             // Es una conexión válida.
             // Creamos el Statement
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-            ResultSet clave=stmt.getGeneratedKeys(); //Le asigno la clave autogenerada
-            int id = clave.getInt( 1 );
+            return stmt.executeUpdate(sql);
+            //stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+            //ResultSet clave=stmt.getGeneratedKeys(); //Le asigno la clave autogenerada
+            //int id = clave.getInt( 1 );
            
-            return id;
+            //return id;
         }
-        return 0;
+        return -1;
     }
     //////////////////////////////////////////////////////////////////////////////////// 
 

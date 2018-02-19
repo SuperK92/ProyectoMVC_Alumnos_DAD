@@ -279,13 +279,16 @@ public class CtrlAlumno implements ActionListener {
         } else if (e.getSource() == dlgalumno.btnModificaciones) {
             try {
                 /////////////////////////////////////////////////////////////////////////////
-                alumno.setDni(dlgalumno.txtDni.getText());
-                alumno.setNombre(dlgalumno.txtNombre.getText());
-                alumno.setApellido1(dlgalumno.txtApellido1.getText());
-                alumno.setApellido2(dlgalumno.txtApellido2.getText());
-
-                int id = negalumnos.Modificar(alumno);
-                dlgalumno.txtRegistro.setText(String.valueOf(id));
+                currentAlumno.setDni(dlgalumno.getTxtDni().getText());
+                currentAlumno.setNombre(dlgalumno.getTxtNombre().getText());
+                currentAlumno.setApellido1(dlgalumno.getTxtApellido1().getText());
+                currentAlumno.setApellido2(dlgalumno.getTxtApellido2().getText());
+             
+                 negalumnos.Modificar(currentAlumno);
+                 rsmodel.fireTableDataChanged(); //Notifica a todos los oyentes que todos los valores de celda en las filas de la tabla pueden haber cambiado.
+                //también puedo solo actualizar la fila en concreto
+                
+          
 
                 //Arregla esta funcion
                 /////////////////////////////////////////////////////////////////////////////
