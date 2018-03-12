@@ -7,9 +7,13 @@ package controlador;
 import conexion.ClaseDatos;
 import modelo.NegAlumnos;
 import datos.Alumno;
+import java.awt.Image;
+import java.awt.Toolkit;
 import vista.DlgAlumno;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
@@ -36,7 +40,6 @@ public class CtrlAlumno implements ActionListener {
 
     //Constructor de la clase
     public CtrlAlumno(java.awt.Frame parent, ClaseDatos cldatos, boolean activoSeleccionar) {
-
         IniciarFormulario(parent);
         IniciarEventos();
         InicializarFormulario(cldatos, activoSeleccionar);
@@ -51,6 +54,11 @@ public class CtrlAlumno implements ActionListener {
         this.dlgalumno.setLocationRelativeTo(null);
         this.dlgalumno.setResizable(false);
         this.dlgalumno.setTitle("Alumnos");
+        
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("../Imagenes/Libros.png"));
+        this.dlgalumno.setIconImage(icon);
+        
+        
 
     }
 
@@ -238,7 +246,9 @@ public class CtrlAlumno implements ActionListener {
     }
 
     //Control de los ActionListener que estamos controlando (btnAltas, btnSalir, btnBajas, btnModificaciones)
+    int c = 0;
     @Override
+    
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == dlgalumno.btnAltas) {
@@ -251,6 +261,7 @@ public class CtrlAlumno implements ActionListener {
                 int id = negalumnos.Altas(alumno);
                 dlgalumno.txtRegistro.setText(String.valueOf(id));
                 //rsmodel.fireTableDataChanged();
+                dlgalumno.jLabel_info.setText("El alumno se ha insertado correctamente");
 
             } catch (Exception ex) {
                 VentanaMensajeError(ex.toString());
@@ -288,6 +299,7 @@ public class CtrlAlumno implements ActionListener {
                  rsmodel.fireTableDataChanged(); //Notifica a todos los oyentes que todos los valores de celda en las filas de la tabla pueden haber cambiado.
                 //también puedo solo actualizar la fila en concreto
                 
+                dlgalumno.jLabel_info.setText("El alumno se ha modificado correctamente");
           
 
                 //Arregla esta funcion
@@ -296,7 +308,18 @@ public class CtrlAlumno implements ActionListener {
                 VentanaMensajeError(ex.toString());
             }
         } else if (e.getSource() == dlgalumno.btnSeleccionar) {
-            Cerrar();
+            //Cerrar();
+            
+            if(c == 0) {
+                ImageIcon icono = new ImageIcon(getClass().getResource("../Imagenes/usuarios.icon.png"));
+                this.dlgalumno.jLabel6.setIcon(icono);
+                c = 1;
+            } else {
+                ImageIcon icono = new ImageIcon(getClass().getResource("../Imagenes/Usuarios.png"));
+                this.dlgalumno.jLabel6.setIcon(icono);
+                c = 0;
+            }
+         
 
         } else if (e.getSource() == dlgalumno.getBtnSeleccionar()) {
 
